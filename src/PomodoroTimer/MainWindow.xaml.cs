@@ -90,7 +90,8 @@ namespace PomodoroTimer
                     button.Content = "Stop";
                     break;
                 case models.PomodoroTimer.PomodoroTimerState.Elapsed:
-                    // TODO ring alarm
+                    // TODO bring app into focus?
+                    new System.Media.SoundPlayer(Properties.Resources.old_timey_ring).Play(); // play alarm sound
                     viewModel.ResetTimer();
                     break;
             }
