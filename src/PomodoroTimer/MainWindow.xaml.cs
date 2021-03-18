@@ -40,7 +40,7 @@ namespace PomodoroTimer
                 {
                     case models.PomodoroTimer.PROPERTY_NAME_SECONDS:
                         // UI will be updated, must be on main thread
-                        this.Dispatcher.Invoke(() => ViewModel_SecondsChanged());
+                        this.Dispatcher.Invoke(() => Seconds_Change());
                         break;
                     case models.PomodoroTimer.PROPERTY_NAME_NUM_POMODOROS:
                         this.Dispatcher.Invoke(() => NumPomodoros_Change());
@@ -49,7 +49,7 @@ namespace PomodoroTimer
             };
 
             // Initialize Views to ViewModel state
-            ViewModel_SecondsChanged();
+            Seconds_Change();
             NumPomodoros_Change();
         }
 
@@ -63,7 +63,7 @@ namespace PomodoroTimer
 
         // Private methods
 
-        private void ViewModel_SecondsChanged()
+        private void Seconds_Change()
         {
             int min = viewModel.Seconds / 60;
             int sec = viewModel.Seconds % 60;
