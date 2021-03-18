@@ -1,0 +1,48 @@
+﻿<Window x:Class="PomodoroTimer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PomodoroTimer"
+        mc:Ignorable="d"
+        Title="Pomodoro Timer"
+        Width="800"
+        Height="450">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="8" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="8" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="8" />
+        </Grid.RowDefinitions>
+        
+        <!-- num pomodoros -->
+        <TextBlock
+            x:Name="numPomodorosTextBlock"
+            Grid.Column="1"
+            Grid.Row="1"
+            Text="numPomodorosTextBlock" />
+
+        <!-- remaining time -->
+        <TextBlock
+            x:Name="timeTextBlock"
+            Grid.Column="1"
+            Grid.Row="2"
+            Text="timeTextBlock" />
+
+        <!-- start/stop button -->
+        <Button
+            x:Name="startStopButton"
+            Grid.Column="1"
+            Grid.Row="3"
+            Content="startStopButton"
+            Click="StartStopButton_Click" />
+
+    </Grid>
+</Window>
