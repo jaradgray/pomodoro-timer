@@ -9,10 +9,22 @@ namespace PomodoroTimer.models
 {
     class PomodoroTimer : BaseINPC
     {
+        /// <summary>
+        /// The State enum defines the various states of a PomodoroTimer object
+        /// </summary>
+        public enum PomodoroTimerState
+        {
+            Running,
+            Stopped,
+            Elapsed
+        }
+
+
         // Constants
         // property names
         public const string PROPERTY_NAME_SECONDS = "Seconds";
         public const string PROPERTY_NAME_NUM_POMODOROS = "NumPomodoros";
+        public const string PROPERTY_NAME_STATE = "State";
 
         //public const int DEFAULT_VALUE_SECONDS = 25 * 60; // 25 mins
         public const int DEFAULT_VALUE_SECONDS = 2; // 25 mins
@@ -42,9 +54,15 @@ namespace PomodoroTimer.models
             }
         }
 
-        public bool IsRunning
+        private PomodoroTimerState _state;
+        public PomodoroTimerState State
         {
-            get { return timer.Enabled; }
+            get { return _state; }
+            private set
+            {
+                _state = value;
+                OnPropertyChanged(PROPERTY_NAME_STATE);
+            }
         }
 
 
@@ -63,6 +81,7 @@ namespace PomodoroTimer.models
 
             Seconds = DEFAULT_VALUE_SECONDS;
             NumPomodoros = 0;
+            State = PomodoroTimerState.Stopped;
         }
 
 
@@ -71,11 +90,13 @@ namespace PomodoroTimer.models
         public void Start()
         {
             timer.Enabled = true;
+            State = PomodoroTimerState.Running;
         }
 
-        public void Stop()
+        public void Reset()
         {
             timer.Enabled = false;
+            State = PomodoroTimerState.Stopped;
             Seconds = DEFAULT_VALUE_SECONDS;
         }
 
@@ -89,9 +110,9 @@ namespace PomodoroTimer.models
             {
                 // POMODORO COMPLETE
                 Console.WriteLine("Pomodoro complete!");
-                NumPomodoros++;
                 timer.Enabled = false;
-                Seconds = DEFAULT_VALUE_SECONDS;
+                NumPomodoros++;
+                State = PomodoroTimerState.Elapsed;
             }
         }
     }
