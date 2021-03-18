@@ -32,6 +32,17 @@ namespace PomodoroTimer.viewmodels
             }
         }
 
+        private models.PomodoroTimer.PomodoroTimerState _timerState;
+        public models.PomodoroTimer.PomodoroTimerState TimerState
+        {
+            get { return _timerState; }
+            private set
+            {
+                _timerState = value;
+                OnPropertyChanged(models.PomodoroTimer.PROPERTY_NAME_STATE);
+            }
+        }
+
 
         // Private variables
         models.PomodoroTimer timer;
@@ -53,25 +64,35 @@ namespace PomodoroTimer.viewmodels
                     case models.PomodoroTimer.PROPERTY_NAME_NUM_POMODOROS:
                         NumPomodoros = timer.NumPomodoros;
                         break;
+                    case models.PomodoroTimer.PROPERTY_NAME_STATE:
+                        TimerState = timer.State;
+                        break;
                 }
             };
             // Initialize fields to timer's state
             Seconds = timer.Seconds;
             NumPomodoros = timer.NumPomodoros;
+            TimerState = timer.State;
         }
 
 
         // Public methods
-        public void ToggleTimer()
+        public void Button_Click()
         {
-            if (timer.IsRunning)
+            switch (timer.State)
             {
-                timer.Stop();
+                case models.PomodoroTimer.PomodoroTimerState.Stopped:
+                    timer.Start();
+                    break;
+                case models.PomodoroTimer.PomodoroTimerState.Running:
+                    timer.Reset();
+                    break;
             }
-            else
-            {
-                timer.Start();
-            }
+        }
+
+        public void ResetTimer()
+        {
+            timer.Reset();
         }
     }
 }

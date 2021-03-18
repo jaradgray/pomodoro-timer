@@ -38,11 +38,11 @@
 
         <!-- start/stop button -->
         <Button
-            x:Name="startStopButton"
+            x:Name="button"
             Grid.Column="1"
             Grid.Row="3"
             Content="startStopButton"
-            Click="StartStopButton_Click" />
+            Click="Button_Click" />
 
     </Grid>
 </Window>

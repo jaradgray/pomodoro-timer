@@ -45,19 +45,23 @@ namespace PomodoroTimer
                     case models.PomodoroTimer.PROPERTY_NAME_NUM_POMODOROS:
                         this.Dispatcher.Invoke(() => NumPomodoros_Change());
                         break;
+                    case models.PomodoroTimer.PROPERTY_NAME_STATE:
+                        this.Dispatcher.Invoke(() => TimerState_Change());
+                        break;
                 }
             };
 
             // Initialize Views to ViewModel state
             Seconds_Change();
             NumPomodoros_Change();
+            TimerState_Change();
         }
 
 
         // Event Handlers
-        private void StartStopButton_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            viewModel.ToggleTimer();
+            viewModel.Button_Click();
         }
 
 
@@ -73,6 +77,23 @@ namespace PomodoroTimer
         private void NumPomodoros_Change()
         {
             numPomodorosTextBlock.Text = $"{viewModel.NumPomodoros} pomodoros";
+        }
+
+        private void TimerState_Change()
+        {
+            switch (viewModel.TimerState)
+            {
+                case models.PomodoroTimer.PomodoroTimerState.Stopped:
+                    button.Content = "Start";
+                    break;
+                case models.PomodoroTimer.PomodoroTimerState.Running:
+                    button.Content = "Stop";
+                    break;
+                case models.PomodoroTimer.PomodoroTimerState.Elapsed:
+                    // TODO ring alarm
+                    viewModel.ResetTimer();
+                    break;
+            }
         }
     }
 }
