@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace PomodoroTimer.models
 {
@@ -13,7 +14,8 @@ namespace PomodoroTimer.models
         public const string PROPERTY_NAME_SECONDS = "Seconds";
         public const string PROPERTY_NAME_NUM_POMODOROS = "NumPomodoros";
 
-        public const int DEFAULT_VALUE_SECONDS = 25 * 60; // 25 mins
+        //public const int DEFAULT_VALUE_SECONDS = 25 * 60; // 25 mins
+        public const int DEFAULT_VALUE_SECONDS = 2; // 25 mins
 
 
         // Properties and their backing fields
@@ -40,11 +42,55 @@ namespace PomodoroTimer.models
             }
         }
 
+        public bool IsRunning
+        {
+            get { return timer.Enabled; }
+        }
+
+
+        // Private variables
+        private Timer timer;
+
 
         // Constructor
         public PomodoroTimer()
         {
+            // Initialize members
+            timer = new Timer();
+            timer.Interval = 1000;
+            timer.AutoReset = true;
+            timer.Elapsed += Timer_Elapsed;
+
             Seconds = DEFAULT_VALUE_SECONDS;
+        }
+
+
+        // Public methods
+
+        public void Start()
+        {
+            timer.Enabled = true;
+        }
+
+        public void Stop()
+        {
+            timer.Enabled = false;
+            Seconds = DEFAULT_VALUE_SECONDS;
+        }
+
+
+        // Private methods
+
+        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            Seconds--;
+            if (Seconds == 0)
+            {
+                // POMODORO COMPLETE
+                Console.WriteLine("Pomodoro complete!");
+                timer.Enabled = false;
+                Seconds = DEFAULT_VALUE_SECONDS;
+            }
         }
     }
 }

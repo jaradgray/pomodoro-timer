@@ -46,7 +46,14 @@ namespace PomodoroTimer.viewmodels
         // Public methods
         public void ToggleTimer()
         {
-            Console.WriteLine("TODO start or stop timer");
+            if (timer.IsRunning)
+            {
+                timer.Stop();
+            }
+            else
+            {
+                timer.Start();
+            }
         }
     }
 }

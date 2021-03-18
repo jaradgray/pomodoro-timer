@@ -39,7 +39,8 @@ namespace PomodoroTimer
                 switch (args.PropertyName)
                 {
                     case models.PomodoroTimer.PROPERTY_NAME_SECONDS:
-                        ViewModel_SecondsChanged();
+                        // UI will be updated, must be on main thread
+                        this.Dispatcher.Invoke(() => ViewModel_SecondsChanged());
                         break;
                 }
             };
