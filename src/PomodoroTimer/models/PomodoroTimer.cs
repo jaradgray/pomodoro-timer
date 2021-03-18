@@ -38,7 +38,7 @@ namespace PomodoroTimer.models
             private set
             {
                 _numPomodoros = value;
-                // TODO raise PropertyChanged event
+                OnPropertyChanged(PROPERTY_NAME_NUM_POMODOROS);
             }
         }
 
@@ -62,6 +62,7 @@ namespace PomodoroTimer.models
             timer.Elapsed += Timer_Elapsed;
 
             Seconds = DEFAULT_VALUE_SECONDS;
+            NumPomodoros = 0;
         }
 
 
@@ -88,6 +89,7 @@ namespace PomodoroTimer.models
             {
                 // POMODORO COMPLETE
                 Console.WriteLine("Pomodoro complete!");
+                NumPomodoros++;
                 timer.Enabled = false;
                 Seconds = DEFAULT_VALUE_SECONDS;
             }

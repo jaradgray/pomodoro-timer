@@ -42,11 +42,15 @@ namespace PomodoroTimer
                         // UI will be updated, must be on main thread
                         this.Dispatcher.Invoke(() => ViewModel_SecondsChanged());
                         break;
+                    case models.PomodoroTimer.PROPERTY_NAME_NUM_POMODOROS:
+                        this.Dispatcher.Invoke(() => NumPomodoros_Change());
+                        break;
                 }
             };
 
             // Initialize Views to ViewModel state
             ViewModel_SecondsChanged();
+            NumPomodoros_Change();
         }
 
 
@@ -64,6 +68,11 @@ namespace PomodoroTimer
             int min = viewModel.Seconds / 60;
             int sec = viewModel.Seconds % 60;
             timeTextBlock.Text = string.Format("{0:D2}:{1:D2}", min, sec);
+        }
+
+        private void NumPomodoros_Change()
+        {
+            numPomodorosTextBlock.Text = $"{viewModel.NumPomodoros} pomodoros";
         }
     }
 }

@@ -9,6 +9,7 @@ namespace PomodoroTimer.viewmodels
     class MainWindowViewModel : BaseINPC
     {
         // Properties and their backing fields
+
         private int _seconds;
         public int Seconds
         {
@@ -19,6 +20,19 @@ namespace PomodoroTimer.viewmodels
                 OnPropertyChanged(models.PomodoroTimer.PROPERTY_NAME_SECONDS);
             }
         }
+
+        private int _numPomodoros;
+        public int NumPomodoros
+        {
+            get { return _numPomodoros; }
+            private set
+            {
+                _numPomodoros = value;
+                OnPropertyChanged(models.PomodoroTimer.PROPERTY_NAME_NUM_POMODOROS);
+            }
+        }
+
+
         // Private variables
         models.PomodoroTimer timer;
 
@@ -36,10 +50,14 @@ namespace PomodoroTimer.viewmodels
                     case models.PomodoroTimer.PROPERTY_NAME_SECONDS:
                         Seconds = timer.Seconds;
                         break;
+                    case models.PomodoroTimer.PROPERTY_NAME_NUM_POMODOROS:
+                        NumPomodoros = timer.NumPomodoros;
+                        break;
                 }
             };
             // Initialize fields to timer's state
             Seconds = timer.Seconds;
+            NumPomodoros = timer.NumPomodoros;
         }
 
 
