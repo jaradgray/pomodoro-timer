@@ -26,8 +26,7 @@ namespace PomodoroTimer.models
         public const string PROPERTY_NAME_NUM_POMODOROS = "NumPomodoros";
         public const string PROPERTY_NAME_STATE = "State";
 
-        //public const int DEFAULT_VALUE_SECONDS = 25 * 60; // 25 mins
-        public const int DEFAULT_VALUE_SECONDS = 2; // 25 mins
+        public const int DEFAULT_VALUE_SECONDS = 25 * 60; // 25 mins
 
 
         // Properties and their backing fields
