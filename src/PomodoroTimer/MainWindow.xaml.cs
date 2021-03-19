@@ -76,7 +76,7 @@ namespace PomodoroTimer
 
         private void NumPomodoros_Change()
         {
-            numPomodorosTextBlock.Text = $"{viewModel.NumPomodoros} pomodoros";
+            numPomodorosTextBlock.Text = $"{viewModel.NumPomodoros} {(viewModel.NumPomodoros == 1 ? "pomodoro" : "pomodoros")}";
         }
 
         private void TimerState_Change()
